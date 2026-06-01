@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>刘禹小朋友的泡泡乐园</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card">
+        <p class="eyebrow">Children's Day Surprise</p>
+        <h1>刘禹小朋友的<br />泡泡乐园</h1>
+        <p class="subtitle">
+          今天只负责开心。点破泡泡，清空烦恼，领取属于小臭宝的六一限定宠爱。
+        </p>
+
+        <div class="hero-tags">
+          <span>可爱恋爱风</span>
+          <span>微信端友好</span>
+          <span>六一限定</span>
+        </div>
+      </section>
+
+      <section class="game-card">
+        <div class="status-bar">
+          <div class="metric">
+            <span class="label">已捏泡泡</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="metric">
+            <span class="label">快乐值</span>
+            <strong id="joy">0%</strong>
+          </div>
+          <button id="restart-button" type="button">重新放一池泡泡</button>
+        </div>
+
+        <div class="bubble-board" id="bubble-board" aria-live="polite">
+          <div class="board-glow"></div>
+
+          <div class="board-overlay" id="board-overlay">
+            <p class="overlay-title">六一快乐，小臭宝</p>
+            <p class="overlay-text">
+              轻轻点泡泡，把今天的烦恼都交给我。点满 <strong>12</strong> 个，就能解锁最终惊喜。
+            </p>
+            <button id="start-button" type="button">开始变幼稚</button>
+          </div>
+
+          <div class="wish-station">
+            <div class="dandelion" id="dandelion" aria-hidden="true">
+              <span class="dandelion-core"></span>
+              <span class="dandelion-stem"></span>
+            </div>
+            <div class="wish-copy">
+              <span class="message-label">蒲公英小角落</span>
+              <p>长按下面的按钮，替小臭宝吹走一点疲惫。</p>
+            </div>
+            <button id="wish-button" class="wish-button" type="button">长按吹蒲公英</button>
+          </div>
+
+          <div class="message-card" id="message-card">
+            <span class="message-label">掉落的小纸条</span>
+            <p id="message-text">准备接收小臭宝专属夸夸。</p>
+          </div>
+
+          <div class="final-card hidden" id="final-card">
+            <div class="fireworks-layer" id="fireworks-layer" aria-hidden="true"></div>
+            <div class="final-photo">
+              <div class="photo-glow"></div>
+              <img
+                id="final-photo-image"
+                class="final-photo-image hidden"
+                src="./assets/finale-photo.png"
+                alt="你们的甜甜回忆"
+              />
+              <div class="photo-placeholder" id="photo-placeholder">
+                <span>你们的甜甜回忆</span>
+              </div>
+            </div>
+            <div class="final-copy">
+              <p class="final-kicker">六一限定大奖</p>
+              <h2>刘禹小朋友，儿童节快乐</h2>
+              <p>
+                长大有时候很辛苦，但在我这里，你可以一直做被偏爱、被想念、被哄着的小朋友。
+              </p>
+              <p class="final-note">小臭宝，今天也要被爱意和泡泡包围。</p>
+              <button id="play-again-button" type="button">再玩一次</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <span>玩法：点泡泡</span>
+          <span>彩蛋：第 12 个泡泡</span>
+          <span>结尾：六一祝福卡片</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
