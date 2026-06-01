@@ -56,11 +56,13 @@ body::after {
 .app-shell {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(280px, 420px) minmax(320px, 620px);
-  gap: 28px;
-  align-items: center;
+  grid-template-columns: minmax(360px, 440px) minmax(760px, 980px);
+  gap: 34px;
+  align-items: start;
   justify-content: center;
-  padding: 28px 20px 40px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 36px 28px 52px;
 }
 
 .hero-card,
@@ -74,8 +76,10 @@ body::after {
 }
 
 .hero-card {
-  padding: 36px 32px;
+  min-height: 570px;
+  padding: 42px 36px;
   overflow: hidden;
+  align-self: start;
 }
 
 .hero-card::before {
@@ -99,17 +103,17 @@ body::after {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 7vw, 4.9rem);
-  line-height: 0.95;
+  font-size: clamp(4.4rem, 5vw, 5.8rem);
+  line-height: 0.9;
 }
 
 .subtitle {
   position: relative;
   z-index: 1;
-  margin: 18px 0 0;
-  max-width: 19em;
-  font-size: 1rem;
-  line-height: 1.8;
+  margin: 22px 0 0;
+  max-width: 18em;
+  font-size: 1.08rem;
+  line-height: 1.9;
   color: var(--muted);
 }
 
@@ -138,7 +142,9 @@ h1 {
 }
 
 .game-card {
-  padding: 18px;
+  min-height: 760px;
+  padding: 20px;
+  align-self: start;
 }
 
 .status-bar,
@@ -188,14 +194,27 @@ button:active {
 
 .bubble-board {
   position: relative;
-  min-height: 660px;
+  min-height: 720px;
   margin: 18px 0 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   border-radius: 28px;
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 241, 249, 0.68)),
     radial-gradient(circle at top, rgba(255, 255, 255, 0.85), transparent 42%);
   border: 1px solid rgba(255, 255, 255, 0.72);
+}
+
+.board-topline {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(360px, 1.15fr) minmax(320px, 0.85fr);
+  gap: 20px;
+  align-items: start;
 }
 
 .bubble-board::before {
@@ -222,75 +241,248 @@ button:active {
 }
 
 .wish-station {
-  position: absolute;
-  top: 164px;
-  left: 18px;
+  position: relative;
+  grid-column: 2;
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 12px 14px;
+  grid-template-columns: 180px 1fr;
+  gap: 14px 18px;
   align-items: center;
-  width: min(320px, calc(100% - 36px));
-  padding: 16px;
+  width: 100%;
+  min-height: 246px;
+  padding: 20px 18px 18px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.72);
-  background: rgba(255, 255, 255, 0.58);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 247, 252, 0.58)),
+    radial-gradient(circle at top left, rgba(149, 220, 255, 0.18), transparent 38%);
   backdrop-filter: blur(14px);
   box-shadow: 0 18px 36px rgba(155, 122, 177, 0.1);
   z-index: 2;
+  overflow: hidden;
+}
+
+.wish-station::after {
+  content: "";
+  position: absolute;
+  inset: auto -14% -26% auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 140, 203, 0.18), transparent 68%);
+  pointer-events: none;
 }
 
 .dandelion {
   position: relative;
-  width: 72px;
-  height: 84px;
+  width: 168px;
+  height: 184px;
+  margin: 0 auto;
+  perspective: 900px;
+  transform-style: preserve-3d;
 }
 
-.dandelion-core {
+.dandelion-head {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 34px;
-  height: 34px;
+  width: 118px;
+  height: 118px;
+  transform: translateX(-50%) rotateX(14deg) rotateY(-10deg);
+  transform-style: preserve-3d;
+  transition: transform 420ms ease, filter 420ms ease;
+}
+
+.dandelion-aura,
+.dandelion-ring,
+.dandelion-seeds,
+.dandelion-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.dandelion-aura {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.2) 44%, transparent 72%),
+    radial-gradient(circle at 30% 34%, rgba(255, 255, 255, 0.92), transparent 18%);
+  filter: blur(8px);
+  transform: translateZ(-10px) scale(1.18);
+  transition: transform 420ms ease, opacity 420ms ease;
+}
+
+.dandelion-ring {
+  background:
+    radial-gradient(circle, transparent 43%, rgba(255, 255, 255, 0.84) 44%, transparent 48%),
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 255, 255, 0.92) 0deg 4deg,
+      rgba(255, 255, 255, 0) 4deg 20deg
+    );
+  mask: radial-gradient(circle, transparent 0 37px, black 38px);
+  opacity: 0.9;
+  transition: transform 420ms ease, opacity 420ms ease, filter 420ms ease;
+}
+
+.dandelion-ring-back {
+  transform: translateZ(-16px) rotate(-8deg) scale(1.04);
+  opacity: 0.45;
+}
+
+.dandelion-ring-mid {
+  transform: translateZ(-6px) rotate(12deg) scale(0.98);
+  opacity: 0.65;
+}
+
+.dandelion-ring-front {
+  transform: translateZ(14px) rotate(18deg) scale(0.92);
+  opacity: 0.82;
+}
+
+.dandelion-seeds {
+  inset: 14px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.98) 0 10%, transparent 11%),
+    repeating-conic-gradient(
+      from 6deg,
+      rgba(255, 255, 255, 0.95) 0deg 2.4deg,
+      rgba(255, 255, 255, 0) 2.4deg 18deg
+    );
+  mask: radial-gradient(circle, transparent 0 23px, black 24px);
+  transition:
+    transform 420ms ease,
+    opacity 420ms ease,
+    filter 420ms ease,
+    clip-path 420ms ease;
+}
+
+.dandelion-seeds-back {
+  transform: translateZ(-12px) rotate(-10deg) scale(1.02);
+  opacity: 0.5;
+}
+
+.dandelion-seeds-front {
+  transform: translateZ(10px) rotate(8deg) scale(0.96);
+  opacity: 0.88;
+}
+
+.dandelion-core {
+  inset: 36px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 36%, rgba(255, 255, 255, 0.18) 68%, transparent 72%);
-  transform: translateX(-50%);
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.9);
+    radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 1), rgba(255, 243, 184, 0.96) 58%, rgba(233, 205, 125, 0.72) 100%);
+  box-shadow:
+    0 0 24px rgba(255, 255, 255, 0.9),
+    inset -4px -6px 12px rgba(170, 137, 80, 0.22);
+  transform: translateZ(20px);
+  transition: transform 420ms ease, box-shadow 420ms ease;
 }
 
 .dandelion-core::before {
   content: "";
   position: absolute;
-  inset: -18px;
+  inset: -12px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, transparent 42%, rgba(255, 255, 255, 0.72) 43%, transparent 47%),
-    conic-gradient(from 0deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.85));
-  mask: radial-gradient(circle, transparent 0 18px, black 18px);
-  opacity: 0.5;
+    radial-gradient(circle, transparent 48%, rgba(255, 247, 211, 0.82) 49%, transparent 54%),
+    conic-gradient(from 0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.18));
+  opacity: 0.55;
 }
 
 .dandelion-stem {
   position: absolute;
   left: 50%;
-  bottom: 2px;
-  width: 4px;
-  height: 52px;
+  bottom: 8px;
+  width: 8px;
+  height: 86px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #8fd4aa, #5fb88b);
-  transform: translateX(-50%);
+  background:
+    linear-gradient(180deg, #a7e2be 0%, #6db98a 42%, #4f9c70 100%);
+  box-shadow:
+    inset 2px 0 0 rgba(255, 255, 255, 0.36),
+    0 8px 18px rgba(95, 184, 139, 0.25);
+  transform: translateX(-50%) rotate(5deg);
+  transform-origin: center bottom;
+}
+
+.dandelion-leaf {
+  position: absolute;
+  bottom: 28px;
+  width: 54px;
+  height: 24px;
+  border-radius: 90% 8% 90% 8%;
+  background: linear-gradient(135deg, rgba(165, 226, 190, 0.95), rgba(78, 153, 110, 0.9));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.dandelion-leaf-left {
+  left: 42px;
+  transform: rotate(-26deg);
+}
+
+.dandelion-leaf-right {
+  right: 38px;
+  width: 46px;
+  transform: scaleX(-1) rotate(-12deg);
+}
+
+.dandelion.blowing .dandelion-head {
+  transform: translateX(-44%) rotateX(18deg) rotateY(-24deg) rotateZ(-7deg);
+  filter: saturate(1.05);
+}
+
+.dandelion.blowing .dandelion-aura {
+  transform: translate3d(18px, -6px, -10px) scale(1.26, 1.06);
+  opacity: 0.7;
+}
+
+.dandelion.blowing .dandelion-ring-back {
+  transform: translate3d(10px, -6px, -16px) rotate(-20deg) scale(1.08, 0.96);
+  opacity: 0.28;
+}
+
+.dandelion.blowing .dandelion-ring-mid {
+  transform: translate3d(18px, -8px, -2px) rotate(6deg) scale(0.96, 0.88);
+  opacity: 0.34;
+}
+
+.dandelion.blowing .dandelion-ring-front {
+  transform: translate3d(28px, -10px, 18px) rotate(30deg) scale(0.84, 0.7);
+  opacity: 0.22;
+  filter: blur(0.6px);
+}
+
+.dandelion.blowing .dandelion-seeds-back {
+  transform: translate3d(18px, -8px, -10px) rotate(-20deg) scale(0.96, 0.88);
+  opacity: 0.28;
+  clip-path: ellipse(58% 46% at 38% 52%);
+}
+
+.dandelion.blowing .dandelion-seeds-front {
+  transform: translate3d(34px, -12px, 24px) rotate(22deg) scale(0.74, 0.56);
+  opacity: 0.08;
+  filter: blur(1.2px);
+  clip-path: ellipse(34% 28% at 24% 54%);
+}
+
+.dandelion.blowing .dandelion-core {
+  transform: translate3d(8px, 0, 20px) scale(0.96);
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.7),
+    inset -4px -6px 12px rgba(170, 137, 80, 0.22);
 }
 
 .wish-copy p {
   margin: 6px 0 0;
-  line-height: 1.5;
+  max-width: 18ch;
+  line-height: 1.65;
   color: var(--muted);
 }
 
 .wish-button {
   grid-column: 1 / -1;
   width: 100%;
-  padding: 13px 18px;
+  margin-top: 6px;
+  padding: 14px 18px;
 }
 
 .wish-button.holding {
@@ -307,6 +499,11 @@ button:active {
   pointer-events: none;
   animation: seedFloat var(--seed-speed, 2200ms) ease-out forwards;
   z-index: 1;
+}
+
+.seed.seed-burst {
+  animation-duration: var(--seed-speed, 1500ms);
+  filter: blur(0.2px);
 }
 
 .seed::before,
@@ -384,9 +581,6 @@ button:active {
 .board-overlay,
 .final-card,
 .message-card {
-  position: absolute;
-  left: 18px;
-  right: 18px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.72);
   background: rgba(255, 255, 255, 0.76);
@@ -395,7 +589,7 @@ button:active {
 }
 
 .board-overlay {
-  top: 18px;
+  position: relative;
   padding: 22px 20px;
   text-align: center;
   z-index: 4;
@@ -423,7 +617,8 @@ button:active {
 }
 
 .message-card {
-  bottom: 18px;
+  position: relative;
+  margin-top: auto;
   padding: 16px 18px;
   z-index: 2;
 }
@@ -439,6 +634,7 @@ button:active {
 }
 
 .final-card {
+  position: absolute;
   inset: 50% 18px auto;
   display: grid;
   grid-template-columns: minmax(180px, 220px) 1fr;
@@ -606,6 +802,16 @@ button:active {
   }
 }
 
+@keyframes dandelionRecover {
+  from {
+    transform: translateX(-44%) rotateX(18deg) rotateY(-24deg) rotateZ(-7deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotateX(14deg) rotateY(-10deg);
+  }
+}
+
 @keyframes sparkBurst {
   0% {
     transform: translate3d(0, 0, 0) scale(0.6);
@@ -618,15 +824,32 @@ button:active {
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .app-shell {
     grid-template-columns: 1fr;
-    max-width: 760px;
+    max-width: 920px;
     margin: 0 auto;
   }
 
   .hero-card {
     padding: 28px 24px;
+    min-height: auto;
+  }
+
+  h1 {
+    font-size: clamp(3.2rem, 11vw, 4.8rem);
+  }
+
+  .game-card {
+    min-height: auto;
+  }
+
+  .board-topline {
+    grid-template-columns: 1fr;
+  }
+
+  .wish-station {
+    grid-column: auto;
   }
 }
 
@@ -645,9 +868,33 @@ button:active {
   }
 
   .wish-station {
-    position: static;
+    grid-template-columns: 132px 1fr;
     width: auto;
-    margin: 150px 18px 0;
+    margin: 0;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .dandelion {
+    width: 132px;
+    height: 154px;
+  }
+
+  .dandelion-head {
+    width: 94px;
+    height: 94px;
+  }
+
+  .dandelion-core {
+    inset: 28px;
+  }
+
+  .dandelion-stem {
+    height: 72px;
+  }
+
+  .wish-copy p {
+    max-width: none;
   }
 
   .final-card {

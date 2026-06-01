@@ -16,8 +16,6 @@
         </p>
 
         <div class="hero-tags">
-          <span>可爱恋爱风</span>
-          <span>微信端友好</span>
           <span>六一限定</span>
         </div>
       </section>
@@ -38,24 +36,36 @@
         <div class="bubble-board" id="bubble-board" aria-live="polite">
           <div class="board-glow"></div>
 
-          <div class="board-overlay" id="board-overlay">
-            <p class="overlay-title">六一快乐，小臭宝</p>
-            <p class="overlay-text">
-              轻轻点泡泡，把今天的烦恼都交给我。点满 <strong>12</strong> 个，就能解锁最终惊喜。
-            </p>
-            <button id="start-button" type="button">开始变幼稚</button>
-          </div>
+          <div class="board-topline">
+            <div class="board-overlay" id="board-overlay">
+              <p class="overlay-title">六一快乐，小臭宝</p>
+              <p class="overlay-text">
+                轻轻点泡泡，把今天的烦恼都交给我。点满 <strong>12</strong> 个，就能解锁最终惊喜。
+              </p>
+              <button id="start-button" type="button">开始变幼稚</button>
+            </div>
 
-          <div class="wish-station">
-            <div class="dandelion" id="dandelion" aria-hidden="true">
-              <span class="dandelion-core"></span>
-              <span class="dandelion-stem"></span>
+            <div class="wish-station">
+              <div class="dandelion" id="dandelion" aria-hidden="true">
+                <div class="dandelion-head">
+                  <span class="dandelion-aura"></span>
+                  <span class="dandelion-ring dandelion-ring-back"></span>
+                  <span class="dandelion-ring dandelion-ring-mid"></span>
+                  <span class="dandelion-seeds dandelion-seeds-back"></span>
+                  <span class="dandelion-core"></span>
+                  <span class="dandelion-seeds dandelion-seeds-front"></span>
+                  <span class="dandelion-ring dandelion-ring-front"></span>
+                </div>
+                <span class="dandelion-stem"></span>
+                <span class="dandelion-leaf dandelion-leaf-left"></span>
+                <span class="dandelion-leaf dandelion-leaf-right"></span>
+              </div>
+              <div class="wish-copy">
+                <span class="message-label">蒲公英小角落</span>
+                <p>长按下面的按钮，替小臭宝吹走一点疲惫。</p>
+              </div>
+              <button id="wish-button" class="wish-button" type="button">长按吹蒲公英</button>
             </div>
-            <div class="wish-copy">
-              <span class="message-label">蒲公英小角落</span>
-              <p>长按下面的按钮，替小臭宝吹走一点疲惫。</p>
-            </div>
-            <button id="wish-button" class="wish-button" type="button">长按吹蒲公英</button>
           </div>
 
           <div class="message-card" id="message-card">

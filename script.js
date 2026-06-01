@@ -36,6 +36,7 @@ let hasUnlockedFinale = false;
 let holdIntervalId = 0;
 let holdTimeoutId = 0;
 let isHoldingWish = false;
+let burstTimeoutId = 0;
 
 function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
@@ -116,8 +117,8 @@ function createSeed() {
   const seed = document.createElement("span");
   const dandelionBox = dandelion.getBoundingClientRect();
   const boardBox = board.getBoundingClientRect();
-  const left = ((dandelionBox.left - boardBox.left + dandelionBox.width * 0.5) / boardBox.width) * 100;
-  const top = ((dandelionBox.top - boardBox.top + dandelionBox.height * 0.24) / boardBox.height) * 100;
+  const left = ((dandelionBox.left - boardBox.left + dandelionBox.width * randomBetween(0.48, 0.66)) / boardBox.width) * 100;
+  const top = ((dandelionBox.top - boardBox.top + dandelionBox.height * randomBetween(0.16, 0.34)) / boardBox.height) * 100;
 
   seed.className = "seed";
   seed.style.setProperty("--seed-left", `${left}%`);
@@ -133,11 +134,38 @@ function createSeed() {
   }, 2900);
 }
 
+function burstSeeds(count = 6) {
+  for (let index = 0; index < count; index += 1) {
+    window.setTimeout(() => {
+      const seed = document.createElement("span");
+      const dandelionBox = dandelion.getBoundingClientRect();
+      const boardBox = board.getBoundingClientRect();
+      const left = ((dandelionBox.left - boardBox.left + dandelionBox.width * randomBetween(0.44, 0.62)) / boardBox.width) * 100;
+      const top = ((dandelionBox.top - boardBox.top + dandelionBox.height * randomBetween(0.12, 0.28)) / boardBox.height) * 100;
+
+      seed.className = "seed seed-burst";
+      seed.style.setProperty("--seed-left", `${left}%`);
+      seed.style.setProperty("--seed-top", `${top}%`);
+      seed.style.setProperty("--seed-drift-x", `${randomBetween(120, 240).toFixed(0)}px`);
+      seed.style.setProperty("--seed-drift-y", `${randomBetween(-90, 24).toFixed(0)}px`);
+      seed.style.setProperty("--seed-rotate", `${randomBetween(80, 240).toFixed(0)}deg`);
+      seed.style.setProperty("--seed-speed", `${randomBetween(1200, 2000).toFixed(0)}ms`);
+      board.appendChild(seed);
+
+      window.setTimeout(() => {
+        seed.remove();
+      }, 2100);
+    }, index * 36);
+  }
+}
+
 function stopHoldingWish() {
   isHoldingWish = false;
+  dandelion.classList.remove("blowing");
   wishButton.classList.remove("holding");
   window.clearTimeout(holdTimeoutId);
   window.clearInterval(holdIntervalId);
+  window.clearTimeout(burstTimeoutId);
 }
 
 function startHoldingWish(event) {
@@ -148,12 +176,15 @@ function startHoldingWish(event) {
   }
 
   isHoldingWish = true;
+  dandelion.classList.add("blowing");
   wishButton.classList.add("holding");
   showMessage("呼一口气，把小臭宝今天的疲惫轻轻吹散。");
 
   holdTimeoutId = window.setTimeout(() => {
+    burstSeeds(10);
     createSeed();
     holdIntervalId = window.setInterval(createSeed, 180);
+    burstTimeoutId = window.setInterval(() => burstSeeds(4), 560);
   }, 180);
 }
 
